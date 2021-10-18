@@ -1,0 +1,26 @@
+.myCard__header {
+    display: flex;
+    justify-content: space-between;
+}
+.myCard__title{
+    width: 75%;
+}
+.myCard__action{
+    width: 25%;
+}
+.myCard__body {
+    height: 150px;
+    overflow-y: scroll;
+}
+.myCard__icon {
+    padding-bottom: 5px;
+    margin: 0 10px;
+    font-size: 20px;
+}
+.task__list {
+    display: flex;
+    justify-content: space-between;
+}
+.text__decor{
+    text-decoration-line: line-through;
+}

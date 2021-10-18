@@ -1,0 +1,8 @@
+.header__form{
+    height: 50%;
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
