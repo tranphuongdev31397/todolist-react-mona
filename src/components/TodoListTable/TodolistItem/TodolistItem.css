@@ -20,7 +20,12 @@
 .task__list {
     display: flex;
     justify-content: space-between;
+    margin: 5px 0;
 }
 .text__decor{
     text-decoration-line: line-through;
+}
+.text__design{
+    margin-bottom: none ;
+    width: 70%;
 }

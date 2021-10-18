@@ -137,7 +137,7 @@ export default function TodolistItem(props) {
             return (
               <div className="task__list" key={index}>
                 <Checkbox onChange={onChange}></Checkbox>
-                <p className={`text-left ${isCheck && "text__decor"}`}>
+                <p className={`text-left text__design w-70 ${isCheck && "text__decor"} `}>
                   {item}
                 </p>
                 <CloseOutlined
