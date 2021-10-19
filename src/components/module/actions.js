@@ -1,6 +1,7 @@
 import {
   ADD_A_ITEM,
   ADD_A_LIST,
+  CHECK_COMPLETE,
   DELETE_A_ITEM,
   REMOVE_A_LIST,
   RENAME_LIST,
@@ -28,4 +29,9 @@ export const actDeleteAItem = (idxList, idxItem) => ({
 export const actRenameList = (idxList, taskName) => ({
   type: RENAME_LIST,
   payload: { idxList, taskName },
+});
+
+export const actCheckComplete = (idxList, idxItem, item, checked) => ({
+  type: CHECK_COMPLETE,
+  payload: { idxList, idxItem, item, checked },
 });

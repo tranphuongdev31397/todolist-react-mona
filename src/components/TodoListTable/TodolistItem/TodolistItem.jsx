@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FileAddOutlined,
   DeleteOutlined,
@@ -8,32 +8,32 @@ import {
 } from "@ant-design/icons";
 import {
   actAddAItem,
+  actCheckComplete,
   actDeleteAItem,
   actRemoveAList,
   actRenameList,
 } from "../../module/actions";
-import { Checkbox } from "antd";
 import "./TodolistItem.css";
 
 export default function TodolistItem(props) {
   const [isHidden, setisHidden] = useState(false);
-  const [isCheck, setisCheck] = useState(null);
   const [isShowInput, setisShowInput] = useState(true);
   const { task, openItems, id } = props.todoItem;
   const getIdx = props.getIdx;
 
   //onChange Antd
-  const onChange = (e) => {
+  const onChange = (e, idx,item) => {
     console.log(`checked = ${e.target.checked}`);
-    setisCheck(e.target.checked);
+    if(document.getElementById(`${e.target.id}`))
+    dispatch(actCheckComplete(getIdx(id), idx, item, e.target.checked));
   };
-  
+
   const handleOnSave = (e) => {
     e.preventDefault();
     let taskName = document.querySelector(`.taskName-${id}`).value;
     dispatch(actRenameList(getIdx(id), taskName));
   };
-
+  const isDecor = useSelector((state) => state.todoListReducer.isDecor);
   const handleOnSubmit = (e) => {
     e.preventDefault();
     let value = document.querySelector(`.inputItem-${id}`).value;
@@ -107,13 +107,14 @@ export default function TodolistItem(props) {
             />
           </div>
           <div className="myCard__action">
-          
-              <SaveOutlined className="myCard__icon"  onClick={(e) => {
+            <SaveOutlined
+              className="myCard__icon"
+              onClick={(e) => {
                 setisHidden(false);
                 handleOnSave(e);
               }}
-              type="submit"/>
-         
+              type="submit"
+            />
           </div>
         </form>
         <div className="card-body myCard__body">
@@ -133,11 +134,19 @@ export default function TodolistItem(props) {
             </button>
           </form>
           {openItems.map((item, index) => {
-            console.log(item);
             return (
               <div className="task__list" key={index}>
-                <Checkbox onChange={onChange}></Checkbox>
-                <p className={`text-left text__design w-70 ${isCheck && "text__decor"} `}>
+                <form className="">
+                  <input
+                    id={`checked-${index}`}
+                    type="checkbox"
+                    aria-label="Checkbox for following text input"
+                    onChange={(e) => {
+                    onChange(e, index, item)}}
+                  />
+                </form>
+
+                <p className={`text-left text__design w-70  ${isDecor} `}>
                   {item}
                 </p>
                 <CloseOutlined
